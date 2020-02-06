@@ -17,7 +17,7 @@ const users = [];
  */
 const createUser = user => {
   const errors = validateForm (user);
-  let errArr = Object.entries (errors);
+  const errArr = Object.entries (errors);
   // console.log (Object.entries (errors).length);
   if (errArr.length > 0) {
     errArr.forEach (err => console.log (`${err[0]} : ${err[1]} `));
@@ -34,16 +34,7 @@ const createUser = user => {
  * @returns {Object} user object
  */
 const readUser = id => {
-  let user = users.find (user => user.email === id);
-
-  const {name, age, email, gender, agreed} = user;
-  console.log (`User info:
-                Name\t:\t${name}
-                age\t:\t${age}
-                email\t:\t${email}
-                gender\t:\t${gender}
-    Agreed to the terms\t:\t${agreed}
-  `);
+  const user = users.find (user => user.email === id);
   return user;
 };
 
@@ -54,11 +45,11 @@ const readUser = id => {
  * @param {String} id Email to update the user with email.
  */
 const updateUser = (key, value, id) => {
-  let currentUser = users.find (user => user.email === id);
+  const currentUser = users.find (user => user.email === id);
   currentUser[key] = value;
   const errors = validateForm (currentUser);
   // console.log (errors);
-  let errArr = Object.entries (errors);
+  const errArr = Object.entries (errors);
   // console.log (users.findIndex (user => user.email === id), '33');
 
   if (errArr.length > 0) {
@@ -105,16 +96,30 @@ const validateForm = user => {
   return errors;
 };
 
+/** 
+ * 
+ * @param {String} id emailId of a user to delete.
+ * @description deletes an user with email
+ * @returns {Object}  deleted user object
+ */
 const deleteUser = id => {
-  let deletedUser = users.find (user => user.email === id);
+  const deletedUser = users.find (user => user.email === id);
   users.splice (users.indexOf (deleteUser), 1);
   return deletedUser;
 };
 
+const sortBy = key => {
+  const sortedUsers = users.slice ();
+  return sortedUsers.sort (
+    (a, b) => (a[key] === b[key] ? 0 : a[key] > b[key] ? 1 : -1)
+  );
+};
+
 //CRUD methods call
+//Create
 createUser ({
   name: 'Deep',
-  age: 20,
+  age: 16,
   email: 'deep25@gmail.com',
   gender: 'male',
   agreed: 'yes',
@@ -126,12 +131,33 @@ createUser ({
   gender: 'male',
   agreed: 'yes',
 });
+createUser ({
+  name: 'Efg',
+  age: 18,
+  email: 'Efg25@gmail.com',
+  gender: 'male',
+  agreed: 'yes',
+});
 
 //Read
-readUser ('deep25@gmail.com');
+
+(() => {
+  const {name, age, email, gender, agreed} = readUser ('deep25@gmail.com');
+  console.log (`User info:
+              Name\t:\t${name}
+              age\t:\t${age}
+              email\t:\t${email}
+              gender\t:\t${gender}
+  Agreed to the terms\t:\t${agreed}
+`);
+}) ();
 //Update
 updateUser ('agreed', 'no', 'abc25@gmail.com');
 // Delete
-let del = deleteUser ('abc25@gmail.com');
-console.log (`${del.email} is removed`);
+// const del = deleteUser ('abc25@gmail.com');
+// console.log (`${del.email} is removed`);
 // console.log ('abc');
+
+//Sort
+console.log (sortBy ('name'));
+console.log (users);
