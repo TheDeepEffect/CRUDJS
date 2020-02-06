@@ -1,0 +1,19 @@
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "UserClass.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDeepEffect/CRUDJS.git"
+  },
+  "author": "Deep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheDeepEffect/CRUDJS/issues"
+  },
+  "homepage": "https://github.com/TheDeepEffect/CRUDJS#readme"
+}
