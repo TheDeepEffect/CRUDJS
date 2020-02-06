@@ -71,25 +71,21 @@ const validateForm = user => {
   const regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const regName = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
 
-  if (!regEmail.test (email) && 'email' in user) {
+  if (!regEmail.test (email)) {
     errors['email'] = 'Enter the valid email.';
   }
-  if (!regName.test (name) && 'name' in user) {
+  if (!regName.test (name)) {
     errors['name'] = 'Enter valid name.';
   }
-  if (age < 0 && age >= 125 && 'age' in user) {
+  if (age < 0 && age >= 125) {
     errors['age'] = 'Enter valid age.';
   }
   if (
-    !(gender.toLowerCase () === 'female' || gender.toLowerCase () === 'male') &&
-    'gender' in user
+    !(gender.toLowerCase () === 'female' || gender.toLowerCase () === 'male')
   ) {
     errors['gender'] = 'Enter valid gender.';
   }
-  if (
-    !(agreed.toLowerCase () === 'yes' || agreed.toLowerCase () === 'no') &&
-    'agreed' in user
-  ) {
+  if (!(agreed.toLowerCase () === 'yes' || agreed.toLowerCase () === 'no')) {
     errors['agreed'] = 'Enter yes or no';
   }
 
@@ -160,4 +156,4 @@ updateUser ('agreed', 'no', 'abc25@gmail.com');
 
 //Sort
 console.log (sortBy ('name'));
-console.log (users);
+// console.log (users);
