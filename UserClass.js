@@ -45,7 +45,8 @@ const readUser = id => {
  * @param {String} id Email to update the user with email.
  */
 const updateUser = (key, value, id) => {
-  const currentUser = users.find (user => user.email === id);
+  const currentUser = {...users.find (user => user.email === id)};
+  // console.log (currentUser);
   currentUser[key] = value;
   const errors = validateForm (currentUser);
   // console.log (errors);
@@ -105,7 +106,7 @@ const deleteUser = id => {
 };
 
 const sortBy = key => {
-  const sortedUsers = users.slice ();
+  const sortedUsers = [...users];
   return sortedUsers.sort (
     (a, b) => (a[key] === b[key] ? 0 : a[key] > b[key] ? 1 : -1)
   );
